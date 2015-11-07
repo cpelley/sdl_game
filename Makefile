@@ -9,7 +9,11 @@ all: program clean
 program: main.o
 	$(CC) $(COMPILER_FLAGS) -o $(OBJ_NAME) $^ $(LINKER_FLAGS)
 
-main.o: main.cpp
+main.o: main.cpp game.h
+	$(CC) -c $(COMPILER_FLAGS) $<
+
+game.o: game.cpp game.h
+	$(CC) -c $(COMPILER_FLAGS) $<
 
 .PHONY: clean cleanest
 
