@@ -7,7 +7,6 @@ Game* game = NULL;
 
 
 int main(int argc, char* args[]){
-    std::cout << "Hello" << std::endl;
     game = new Game();
     bool sucessful;
     sucessful = game->init("Some title", 0, 0, 640, 480, 0);
