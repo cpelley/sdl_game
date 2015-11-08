@@ -13,8 +13,9 @@ class Game{
         Game(){};
         ~Game(){};
 
-        bool init(const char* title, int xpos, int ypos, int width, int height,
-    	      int flags);
+        bool init(const char* title, int width, int height,
+                  bool fullscreen=false, bool centered=false,
+                  int xpos=0, int ypos=0);
         void render();
         void update(){}
         void handle_events();

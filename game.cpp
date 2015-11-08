@@ -5,11 +5,18 @@
 #include "game.h"
 
 
-bool Game::init(const char* title, int xpos, int ypos, int width, int height,
-		int flags){
+bool Game::init(const char* title, int width, int height, bool fullscreen,
+                bool centered, int xpos, int ypos){
+    int flags = SDL_WINDOW_SHOWN;
+    if (fullscreen == true){
+        flags = SDL_WINDOW_FULLSCREEN;}
+
+    if (centered == true){
+        xpos = ypos = SDL_WINDOWPOS_CENTERED;}
+
     // Initialise SDL
     if (SDL_Init(SDL_INIT_VIDEO) >= 0){
-        _window = SDL_CreateWindow(title, xpos, ypos, height, width, flags);}
+        _window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);}
     else{
          std::cout << "SDL could not initialised.  SDL_Error: " <<
             SDL_GetError() << "\n";}

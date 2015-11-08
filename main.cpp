@@ -9,7 +9,9 @@ Game* game = NULL;
 int main(int argc, char* args[]){
     game = new Game();
     bool sucessful;
-    sucessful = game->init("Some title", 0, 0, 640, 480, 0);
+    sucessful = game->init("Some title", 640, 480, false, true);
+    if (sucessful != true){
+        return 1;}
 
     while (game->running()){
         game->handle_events();
