@@ -35,6 +35,17 @@ bool Game::init(const char* title, int width, int height, bool fullscreen,
     else{
         return false;}
 
+    // Initialise textures
+    SDL_Surface* tmp_surface = SDL_LoadBMP("resources/rider.bmp");
+    _texture = SDL_CreateTextureFromSurface(_renderer, tmp_surface);
+    SDL_FreeSurface(tmp_surface);
+
+    SDL_QueryTexture(_texture, NULL, NULL, &_source_rectangle.w, &_source_rectangle.h);
+    _target_rectangle.x = _source_rectangle.x = 0;
+    _target_rectangle.y = _source_rectangle.y = 0;
+    _target_rectangle.w = _source_rectangle.w;
+    _target_rectangle.h = _source_rectangle.h;
+
     _running = true;
     return true;}
 
@@ -42,6 +53,8 @@ bool Game::init(const char* title, int width, int height, bool fullscreen,
 void Game::render(){
     // Clear the window
     SDL_RenderClear(_renderer);
+
+    SDL_RenderCopy(_renderer, _texture, &_source_rectangle, &_target_rectangle);
 
     // Show window
     SDL_RenderPresent(_renderer);}

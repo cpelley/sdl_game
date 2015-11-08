@@ -8,6 +8,10 @@ class Game{
         bool _running = false;
         SDL_Window* _window = NULL;
         SDL_Renderer* _renderer = NULL;
+        
+        SDL_Texture* _texture = NULL;
+        SDL_Rect _source_rectangle;
+        SDL_Rect _target_rectangle;
 
     public:
         Game(){};
