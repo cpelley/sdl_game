@@ -1,5 +1,6 @@
 #include<iostream>
 
+#include<SDL2/SDL_image.h>
 #include<SDL2/SDL.h>
 
 #include "game.h"
@@ -35,8 +36,15 @@ bool Game::init(const char* title, int width, int height, bool fullscreen,
     else{
         return false;}
 
+    // Initialise multi format image loading from SDL image library
+    //int imgflags = IMG_INIT_PNG;
+    //if(!(IMG_Init(imgflags) & imgflags)) {
+    //    std::cout << "SDL_image could not be initialised. " <<
+    //        "SDL_image Error: " << IMG_GetError();
+    //    return false;}
+
     // Initialise textures
-    SDL_Surface* tmp_surface = SDL_LoadBMP("resources/animate.bmp");
+    SDL_Surface* tmp_surface = IMG_Load("resources/animate.png");
     _texture = SDL_CreateTextureFromSurface(_renderer, tmp_surface);
     SDL_FreeSurface(tmp_surface);
 
