@@ -21,7 +21,7 @@ class Game{
                   bool fullscreen=false, bool centered=false,
                   int xpos=0, int ypos=0);
         void render();
-        void update(){}
+        void update();
         void handle_events();
         void clean();
         bool running(){return _running;}

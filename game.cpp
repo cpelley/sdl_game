@@ -36,15 +36,16 @@ bool Game::init(const char* title, int width, int height, bool fullscreen,
         return false;}
 
     // Initialise textures
-    SDL_Surface* tmp_surface = SDL_LoadBMP("resources/rider.bmp");
+    SDL_Surface* tmp_surface = SDL_LoadBMP("resources/animate.bmp");
     _texture = SDL_CreateTextureFromSurface(_renderer, tmp_surface);
     SDL_FreeSurface(tmp_surface);
 
-    SDL_QueryTexture(_texture, NULL, NULL, &_source_rectangle.w, &_source_rectangle.h);
+    // Get width and height of texture
+    //SDL_QueryTexture(_texture, NULL, NULL, &_source_rectangle.w, &_source_rectangle.h);
     _target_rectangle.x = _source_rectangle.x = 0;
     _target_rectangle.y = _source_rectangle.y = 0;
-    _target_rectangle.w = _source_rectangle.w;
-    _target_rectangle.h = _source_rectangle.h;
+    _target_rectangle.w = _source_rectangle.w = 128;
+    _target_rectangle.h = _source_rectangle.h = 82;
 
     _running = true;
     return true;}
@@ -58,6 +59,10 @@ void Game::render(){
 
     // Show window
     SDL_RenderPresent(_renderer);}
+
+
+void Game::update(){
+    _source_rectangle.x = 128 * int(((SDL_GetTicks() / 100) % 6));}
 
 
 void Game::clean(){
