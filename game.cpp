@@ -55,7 +55,9 @@ void Game::render(){
     // Clear the window
     SDL_RenderClear(_renderer);
 
-    SDL_RenderCopy(_renderer, _texture, &_source_rectangle, &_target_rectangle);
+    //SDL_RenderCopy(_renderer, _texture, &_source_rectangle, &_target_rectangle);
+    SDL_RenderCopyEx(_renderer, _texture, &_source_rectangle,
+                     &_target_rectangle, 0, 0, SDL_FLIP_HORIZONTAL);
 
     // Show window
     SDL_RenderPresent(_renderer);}
