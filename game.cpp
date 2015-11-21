@@ -4,6 +4,7 @@
 #include<SDL2/SDL.h>
 
 #include "game.h"
+#include "texture_manager.h"
 
 
 bool Game::init(const char* title, int width, int height, bool fullscreen,
@@ -37,23 +38,13 @@ bool Game::init(const char* title, int width, int height, bool fullscreen,
         return false;}
 
     // Initialise multi format image loading from SDL image library
-    //int imgflags = IMG_INIT_PNG;
-    //if(!(IMG_Init(imgflags) & imgflags)) {
-    //    std::cout << "SDL_image could not be initialised. " <<
-    //        "SDL_image Error: " << IMG_GetError();
-    //    return false;}
+    int imgflags = IMG_INIT_PNG;
+    if(!(IMG_Init(imgflags) & imgflags)) {
+        std::cout << "SDL_image could not be initialised. " <<
+            "SDL_image Error: " << IMG_GetError();
+        return false;}
 
-    // Initialise textures
-    SDL_Surface* tmp_surface = IMG_Load("resources/animate.png");
-    _texture = SDL_CreateTextureFromSurface(_renderer, tmp_surface);
-    SDL_FreeSurface(tmp_surface);
-
-    // Get width and height of texture
-    //SDL_QueryTexture(_texture, NULL, NULL, &_source_rectangle.w, &_source_rectangle.h);
-    _target_rectangle.x = _source_rectangle.x = 0;
-    _target_rectangle.y = _source_rectangle.y = 0;
-    _target_rectangle.w = _source_rectangle.w = 128;
-    _target_rectangle.h = _source_rectangle.h = 82;
+    _texture_manager.load("resources/animate.png", "animate", _renderer);
 
     _running = true;
     return true;}
@@ -63,16 +54,16 @@ void Game::render(){
     // Clear the window
     SDL_RenderClear(_renderer);
 
-    //SDL_RenderCopy(_renderer, _texture, &_source_rectangle, &_target_rectangle);
-    SDL_RenderCopyEx(_renderer, _texture, &_source_rectangle,
-                     &_target_rectangle, 0, 0, SDL_FLIP_HORIZONTAL);
+    _texture_manager.draw("animate", 0,0, 128, 82, _renderer);
+    _texture_manager.draw_frame("animate", 100, 100, 128, 82, 1, _current_frame,
+                               _renderer);
 
     // Show window
     SDL_RenderPresent(_renderer);}
 
 
 void Game::update(){
-    _source_rectangle.x = 128 * int(((SDL_GetTicks() / 100) % 6));}
+    _current_frame = int((SDL_GetTicks() / 100) % 6);}
 
 
 void Game::clean(){

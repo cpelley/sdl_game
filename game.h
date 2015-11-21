@@ -2,17 +2,18 @@
 #define GAME_H
 #include<SDL2/SDL.h>
 
+#include "texture_manager.h"
+
 
 class Game{
     private:
         bool _running = false;
         SDL_Window* _window = NULL;
         SDL_Renderer* _renderer = NULL;
-        
-        SDL_Texture* _texture = NULL;
-        SDL_Rect _source_rectangle;
-        SDL_Rect _target_rectangle;
 
+        int _current_frame;
+        TextureManager _texture_manager;
+        
     public:
         Game(){};
         ~Game(){};

@@ -6,13 +6,16 @@ OBJ_NAME = run
 default: program
 all: program clean
 
-program: main.o game.o
+program: main.o game.o texture_manager.o
 	$(CXX) $(COMPILER_FLAGS) -o $(OBJ_NAME) $^ $(LINKER_FLAGS)
 
 main.o: main.cpp game.o
 	$(CXX) -c $(COMPILER_FLAGS) $<
 
-game.o: game.cpp
+game.o: game.cpp texture_manager.o
+	$(CXX) -c $(COMPILER_FLAGS) $<
+
+texture_manager.o: texture_manager.cpp
 	$(CXX) -c $(COMPILER_FLAGS) $<
 
 .PHONY: clean cleanest
