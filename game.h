@@ -12,7 +12,6 @@ class Game{
         SDL_Renderer* _renderer = NULL;
 
         int _current_frame;
-        TextureManager _texture_manager;
         
     public:
         Game(){};

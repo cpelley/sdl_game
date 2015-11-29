@@ -44,7 +44,8 @@ bool Game::init(const char* title, int width, int height, bool fullscreen,
             "SDL_image Error: " << IMG_GetError();
         return false;}
 
-    _texture_manager.load("resources/animate.png", "animate", _renderer);
+    TextureManager::get_instance()->load("resources/animate.png", "animate",
+                                        _renderer);
 
     _running = true;
     return true;}
@@ -54,9 +55,9 @@ void Game::render(){
     // Clear the window
     SDL_RenderClear(_renderer);
 
-    _texture_manager.draw("animate", 0,0, 128, 82, _renderer);
-    _texture_manager.draw_frame("animate", 100, 100, 128, 82, 1, _current_frame,
-                               _renderer);
+    TextureManager::get_instance()->draw("animate", 0,0, 128, 82, _renderer);
+    TextureManager::get_instance()->draw_frame("animate", 100, 100, 128, 82, 1,
+                                               _current_frame, _renderer);
 
     // Show window
     SDL_RenderPresent(_renderer);}

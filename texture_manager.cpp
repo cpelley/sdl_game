@@ -6,6 +6,9 @@
 #include "texture_manager.h"
 
 
+TextureManager* TextureManager::_instance = NULL;
+
+
 bool TextureManager::load(std::string filename, std::string id,
                           SDL_Renderer* renderer){
     // Initialise textures
