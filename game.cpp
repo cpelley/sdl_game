@@ -45,7 +45,7 @@ bool Game::init(const char* title, int width, int height, bool fullscreen,
         return false;}
 
     TextureManager::get_instance()->load("resources/animate.png", "animate",
-                                        _renderer);
+                                         _renderer);
 
     _running = true;
     return true;}
