@@ -2,8 +2,6 @@
 #define GAME_H
 #include<SDL2/SDL.h>
 
-#include "texture_manager.h"
-
 
 class Game{
     private:
