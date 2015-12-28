@@ -4,6 +4,7 @@
 #include<SDL2/SDL.h>
 
 #include "game.h"
+#include "gameobject.h"
 #include "texture_manager.h"
 
 
@@ -47,6 +48,9 @@ bool Game::init(const char* title, int width, int height, bool fullscreen,
     TextureManager::get_instance()->load("resources/animate.png", "animate",
                                          _renderer);
 
+    _game_object.load(100, 100, 128, 82, "animate");
+    _player.load(300, 300, 128, 82, "animate");
+
     _running = true;
     return true;}
 
@@ -55,16 +59,16 @@ void Game::render(){
     // Clear the window
     SDL_RenderClear(_renderer);
 
-    TextureManager::get_instance()->draw("animate", 0,0, 128, 82, _renderer);
-    TextureManager::get_instance()->draw_frame("animate", 100, 100, 128, 82, 1,
-                                               _current_frame, _renderer);
+    _game_object.draw(_renderer);
+    _player.draw(_renderer);
 
     // Show window
     SDL_RenderPresent(_renderer);}
 
 
 void Game::update(){
-    _current_frame = int((SDL_GetTicks() / 100) % 6);}
+    _game_object.update();
+    _player.update();}
 
 
 void Game::clean(){

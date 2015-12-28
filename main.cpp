@@ -16,7 +16,8 @@ int main(int argc, char* args[]){
     while (game->running()){
         game->handle_events();
         game->update();
-        game->render();}
+        game->render();
+	SDL_Delay(10);} // add delay as simple way of setting fps}
     game->clean();
 
     return 0;}

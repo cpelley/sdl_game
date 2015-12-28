@@ -2,6 +2,9 @@
 #define GAME_H
 #include<SDL2/SDL.h>
 
+#include "gameobject.h"
+#include "player.h"
+
 
 class Game{
     private:
@@ -9,7 +12,8 @@ class Game{
         SDL_Window* _window = NULL;
         SDL_Renderer* _renderer = NULL;
 
-        int _current_frame;
+	Player _player;
+	GameObject _game_object;
         
     public:
         Game(){};
