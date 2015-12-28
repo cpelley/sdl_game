@@ -1,5 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
+#include<vector>
+
 #include<SDL2/SDL.h>
 
 #include "gameobject.h"
@@ -12,8 +14,9 @@ class Game{
         SDL_Window* _window = NULL;
         SDL_Renderer* _renderer = NULL;
 
-	Player _player;
-	GameObject _game_object;
+	std::vector<GameObject*> _game_objects;
+	GameObject* _player;
+	GameObject* _game_object;
         
     public:
         Game(){};

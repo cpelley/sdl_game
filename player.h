@@ -11,6 +11,6 @@ class Player : public GameObject{
 	void load(int x, int y, int width, int height, std::string texture_id);
         void draw(SDL_Renderer* renderer);
 	void update();
-	void clean();};
+	void clean(){}};
 
 #endif

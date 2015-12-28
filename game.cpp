@@ -1,4 +1,5 @@
 #include<iostream>
+#include<vector>
 
 #include<SDL2/SDL_image.h>
 #include<SDL2/SDL.h>
@@ -48,8 +49,15 @@ bool Game::init(const char* title, int width, int height, bool fullscreen,
     TextureManager::get_instance()->load("resources/animate.png", "animate",
                                          _renderer);
 
-    _game_object.load(100, 100, 128, 82, "animate");
-    _player.load(300, 300, 128, 82, "animate");
+    // Initialise game objects
+    _player = new Player();
+    _game_object = new GameObject();
+    // Populate vector with our game objects
+    _game_objects.push_back(_player);
+    _game_objects.push_back(_game_object);
+
+    _game_object->load(100, 100, 128, 82, "animate");
+    _player->load(300, 300, 128, 82, "animate");
 
     _running = true;
     return true;}
@@ -59,16 +67,18 @@ void Game::render(){
     // Clear the window
     SDL_RenderClear(_renderer);
 
-    _game_object.draw(_renderer);
-    _player.draw(_renderer);
+    for(std::vector<GameObject*>::size_type i = 0; i != _game_objects.size();
+            i++){
+        _game_objects[i]->draw(_renderer);}
 
     // Show window
     SDL_RenderPresent(_renderer);}
 
 
 void Game::update(){
-    _game_object.update();
-    _player.update();}
+    for(std::vector<GameObject*>::size_type i = 0; i != _game_objects.size();
+            i++){
+        _game_objects[i]->update();}}
 
 
 void Game::clean(){

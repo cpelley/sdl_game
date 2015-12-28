@@ -20,9 +20,12 @@ class GameObject{
 	int _height;
 
     public:
-	void load(int x, int y, int width, int height, std::string texture_id);
-        void draw(SDL_Renderer* renderer);
-	void update();
-	void clean();};
+        // virtual keyword to ensure that type determined at run-time - allows
+	// us to use GameObject pointers for when referring to subclasses for
+	// example.
+	virtual void load(int x, int y, int width, int height, std::string texture_id);
+        virtual void draw(SDL_Renderer* renderer);
+	virtual void update();
+	virtual void clean(){}};
 
 #endif
