@@ -17,6 +17,7 @@ class Game{
 	std::vector<GameObject*> _game_objects;
 	GameObject* _player;
 	GameObject* _game_object;
+	GameObject* _enemy;
         
     public:
         Game(){};

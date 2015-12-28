@@ -6,6 +6,7 @@
 
 #include "game.h"
 #include "gameobject.h"
+#include "enemy.h"
 #include "texture_manager.h"
 
 
@@ -52,12 +53,16 @@ bool Game::init(const char* title, int width, int height, bool fullscreen,
     // Initialise game objects
     _player = new Player();
     _game_object = new GameObject();
+    _enemy = new Enemy();
+
     // Populate vector with our game objects
     _game_objects.push_back(_player);
     _game_objects.push_back(_game_object);
+    _game_objects.push_back(_enemy);
 
     _game_object->load(100, 100, 128, 82, "animate");
     _player->load(300, 300, 128, 82, "animate");
+    _enemy->load(0, 0, 128, 82, "animate");
 
     _running = true;
     return true;}

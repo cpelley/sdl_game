@@ -6,13 +6,13 @@ OBJ_NAME = run
 default: program
 all: program clean
 
-program: main.o game.o texture_manager.o gameobject.o player.o
+program: main.o game.o texture_manager.o gameobject.o player.o enemy.o
 	$(CXX) $(COMPILER_FLAGS) -o $(OBJ_NAME) $^ $(LINKER_FLAGS)
 
 main.o: main.cpp game.o
 	$(CXX) -c $(COMPILER_FLAGS) $<
 
-game.o: game.cpp texture_manager.o gameobject.o player.o
+game.o: game.cpp texture_manager.o gameobject.o player.o enemy.o
 	$(CXX) -c $(COMPILER_FLAGS) $<
 
 texture_manager.o: texture_manager.cpp
@@ -23,6 +23,10 @@ gameobject.o: gameobject.cpp texture_manager.o
 
 player.o: player.cpp gameobject.o
 	$(CXX) -c $(COMPILER_FLAGS) $<
+
+enemy.o: enemy.cpp gameobject.o
+	$(CXX) -c $(COMPILER_FLAGS) $<
+
 
 .PHONY: clean cleanest
 
