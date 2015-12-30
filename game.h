@@ -8,7 +8,7 @@
 #include "player.h"
 
 
-class Game{
+class Game {
     private:
         bool _running = false;
         SDL_Window* _window = NULL;
@@ -30,6 +30,6 @@ class Game{
         void update();
         void handle_events();
         void clean();
-        bool running(){return _running;}
+        bool running() {return _running;}
 };
 #endif

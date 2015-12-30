@@ -6,7 +6,7 @@
 #include<SDL2/SDL.h>
 
 
-class GameObject{
+class GameObject {
     protected:
 	std::string _texture_id;
 
@@ -26,6 +26,7 @@ class GameObject{
 	virtual void load(int x, int y, int width, int height, std::string texture_id);
         virtual void draw(SDL_Renderer* renderer);
 	virtual void update();
-	virtual void clean(){}};
+	virtual void clean(){}
+};
 
 #endif

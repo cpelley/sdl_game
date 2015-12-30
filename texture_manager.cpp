@@ -10,27 +10,31 @@ TextureManager* TextureManager::_instance = NULL;
 
 
 bool TextureManager::load(std::string filename, std::string id,
-                          SDL_Renderer* renderer){
+                          SDL_Renderer* renderer) {
     // Initialise textures
     SDL_Surface* tmp_surface = IMG_Load(filename.c_str());
-    if(tmp_surface == NULL){
+    if(tmp_surface == NULL) {
         std::cout << "Unable to load image " << filename.c_str() <<
             " SDL Error: " << SDL_GetError() << std::endl;
-        return false;}
+        return false;
+    }
 
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, tmp_surface);
     SDL_FreeSurface(tmp_surface);
-    if(texture == NULL){
+    if(texture == NULL) {
         std::cout << "Unable to create texture from " << filename.c_str() <<
             " SDL Error: " << SDL_GetError() << std::endl;
-        return false;}
-    else{
-        _texture_map[id] = texture;}
-    return true;}
+        return false;
+    }
+    else {
+        _texture_map[id] = texture;
+    }
+    return true;
+}
 
 
 void TextureManager::draw(std::string id, int x, int y, int width, int height,
-                          SDL_Renderer* renderer, SDL_RendererFlip flip){
+                          SDL_Renderer* renderer, SDL_RendererFlip flip) {
     SDL_Rect source_rectangle;
     SDL_Rect target_rectangle;
 
@@ -43,12 +47,14 @@ void TextureManager::draw(std::string id, int x, int y, int width, int height,
     target_rectangle.h = source_rectangle.h = height;
 
     SDL_RenderCopyEx(renderer, _texture_map[id], &source_rectangle,
-                     &target_rectangle, 0, 0, flip);}
+                     &target_rectangle, 0, 0, flip);
+}
 
 
 void TextureManager::draw_frame(std::string id, int x, int y, int width,
                                 int height, int current_row, int current_frame,
-                                SDL_Renderer* renderer, SDL_RendererFlip flip){
+                                SDL_Renderer* renderer,
+				SDL_RendererFlip flip) {
     SDL_Rect source_rectangle;
     SDL_Rect target_rectangle;
     source_rectangle.x = width * current_frame;
@@ -58,4 +64,5 @@ void TextureManager::draw_frame(std::string id, int x, int y, int width,
     target_rectangle.x = x;
     target_rectangle.y = y;
     SDL_RenderCopyEx(renderer, _texture_map[id], &source_rectangle,
-                     &target_rectangle, 0, 0, flip);}
+                     &target_rectangle, 0, 0, flip);
+}
