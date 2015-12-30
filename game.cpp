@@ -7,7 +7,11 @@
 #include "game.h"
 #include "gameobject.h"
 #include "enemy.h"
+#include "player.h"
 #include "texture_manager.h"
+
+
+Game* Game::_instance = NULL;
 
 
 bool Game::init(const char* title, int width, int height, bool fullscreen,
@@ -60,18 +64,11 @@ bool Game::init(const char* title, int width, int height, bool fullscreen,
                                          _renderer);
 
     // Initialise game objects
-    _player = new Player();
-    _game_object = new GameObject();
-    _enemy = new Enemy();
+    _game_objects.push_back(new Player(new LoaderParams(
+        100, 100, 128, 82, "animate")));
 
-    // Populate vector with our game objects
-    _game_objects.push_back(_player);
-    _game_objects.push_back(_game_object);
-    _game_objects.push_back(_enemy);
-
-    _game_object->load(100, 100, 128, 82, "animate");
-    _player->load(300, 300, 128, 82, "animate");
-    _enemy->load(0, 0, 128, 82, "animate");
+    _game_objects.push_back(new Enemy(new LoaderParams(
+        300, 300, 128, 82, "animate")));
 
     _running = true;
     return true;
@@ -84,7 +81,7 @@ void Game::render() {
 
     for(std::vector<GameObject*>::size_type i = 0; i != _game_objects.size();
             i++) {
-        _game_objects[i]->draw(_renderer);
+        _game_objects[i]->draw();
     }
 
     // Show window

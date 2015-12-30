@@ -6,7 +6,7 @@ OBJ_NAME = run
 default: program
 all: program clean
 
-program: main.o game.o texture_manager.o gameobject.o player.o enemy.o
+program: main.o game.o texture_manager.o gameobject.o player.o enemy.o sdlgameobject.o loaderparams.o
 	$(CXX) $(COMPILER_FLAGS) -o $(OBJ_NAME) $^ $(LINKER_FLAGS)
 
 main.o: main.cpp game.o
@@ -18,13 +18,19 @@ game.o: game.cpp texture_manager.o gameobject.o player.o enemy.o
 texture_manager.o: texture_manager.cpp
 	$(CXX) -c $(COMPILER_FLAGS) $<
 
-gameobject.o: gameobject.cpp texture_manager.o
+gameobject.o: gameobject.cpp loaderparams.o
 	$(CXX) -c $(COMPILER_FLAGS) $<
 
-player.o: player.cpp gameobject.o
+sdlgameobject.o: sdlgameobject.cpp loaderparams.o gameobject.o
 	$(CXX) -c $(COMPILER_FLAGS) $<
 
-enemy.o: enemy.cpp gameobject.o
+player.o: player.cpp sdlgameobject.o loaderparams.o
+	$(CXX) -c $(COMPILER_FLAGS) $<
+
+enemy.o: enemy.cpp sdlgameobject.o loaderparams.o
+	$(CXX) -c $(COMPILER_FLAGS) $<
+
+loaderparams.o: loaderparams.cpp 
 	$(CXX) -c $(COMPILER_FLAGS) $<
 
 

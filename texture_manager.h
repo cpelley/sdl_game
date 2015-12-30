@@ -12,14 +12,16 @@ class TextureManager {
         static TextureManager* _instance;
         std::map<std::string, SDL_Texture*> _texture_map;
         TextureManager(){};
-        ~TextureManager(){};
 
     public:
+        // Make the class a singleton
         static TextureManager* get_instance() {
             if(_instance == NULL){
                 _instance = new TextureManager();}
             return _instance;
-	}
+	    }
+
+        ~TextureManager(){};
 
         bool load(std::string filename, std::string id,
                   SDL_Renderer* renderer);
