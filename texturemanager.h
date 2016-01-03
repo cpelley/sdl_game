@@ -1,5 +1,5 @@
-#ifndef TEXTURE_MANAGER_H
-#define TEXTURE_MANAGER_H
+#ifndef TEXTUREMANAGER_H
+#define TEXTUREMANAGER_H
 
 #include<SDL2/SDL.h>
 
