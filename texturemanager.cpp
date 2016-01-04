@@ -3,7 +3,7 @@
 #include<SDL2/SDL_image.h>
 #include<SDL2/SDL.h>
 
-#include "texture_manager.h"
+#include "texturemanager.h"
 
 
 TextureManager* TextureManager::_instance = NULL;

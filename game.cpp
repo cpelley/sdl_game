@@ -8,7 +8,7 @@
 #include "gameobject.h"
 #include "enemy.h"
 #include "player.h"
-#include "texture_manager.h"
+#include "texturemanager.h"
 
 
 Game* Game::_instance = NULL;
